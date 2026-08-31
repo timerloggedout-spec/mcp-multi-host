@@ -1,0 +1,37 @@
+name: Catalog CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate catalog.json
+        run: |
+          node -e "
+            const c = JSON.parse(require('fs').readFileSync('catalog.json','utf8'));
+            if (!c.hosts || !Array.isArray(c.hosts) || c.hosts.length < 2) {
+              throw new Error('catalog.hosts must have >= 2 entries');
+            }
+            for (const h of c.hosts) {
+              if (!h.id) throw new Error('host missing id');
+            }
+            console.log('OK hosts:', c.hosts.map(h => h.id).join(', '));
+          "
+      - name: Emit client config artifact
+        run: |
+          mkdir -p dist
+          node -e "
+            const c = JSON.parse(require('fs').readFileSync('catalog.json','utf8'));
+            require('fs').writeFileSync('dist/mcp-client.json', JSON.stringify(c.client_snippets.cursor, null, 2));
+          "
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mcp-client-config
+          path: dist/mcp-client.json
