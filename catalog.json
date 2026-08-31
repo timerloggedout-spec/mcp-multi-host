@@ -1,0 +1,58 @@
+{
+  "version": "0.1.0",
+  "updated": "2026-08-31T00:40:00Z",
+  "hosts": [
+    {
+      "id": "termux-mcp",
+      "repo": "https://github.com/timerloggedout-spec/termux-mcp",
+      "transport": "streamable-http",
+      "vercel_project": "termux-mcp",
+      "endpoints": {
+        "mcp": "https://termux-mcp.vercel.app/mcp",
+        "api": "https://termux-mcp.vercel.app/api/server"
+      },
+      "tools": ["termux_status", "termux_run", "termux_pkg"],
+      "status": "repo_ready_deploy_pending_vercel_role"
+    },
+    {
+      "id": "android-mcp",
+      "repo": "https://github.com/timerloggedout-spec/android-mcp",
+      "transport": "streamable-http",
+      "vercel_project": "android-mcp",
+      "endpoints": {
+        "mcp": "https://android-mcp.vercel.app/mcp",
+        "api": "https://android-mcp.vercel.app/api/server"
+      },
+      "tools": ["android_status", "android_adb", "android_devices"],
+      "status": "repo_ready_deploy_pending_vercel_role"
+    },
+    {
+      "id": "github-remote",
+      "transport": "http",
+      "endpoints": {
+        "mcp": "https://api.githubcopilot.com/mcp/"
+      },
+      "tools": ["toolsets: default|repos|issues|pull_requests|actions"],
+      "status": "hosted_by_github"
+    },
+    {
+      "id": "gh-aw-mcpg",
+      "repo": "https://github.com/timerloggedout-spec/gh-aw-mcpg_fork",
+      "transport": "gateway",
+      "note": "MCP Gateway — front multiple servers",
+      "status": "fork_synced"
+    }
+  ],
+  "client_snippets": {
+    "cursor": {
+      "mcpServers": {
+        "termux": { "url": "https://termux-mcp.vercel.app/mcp" },
+        "android": { "url": "https://android-mcp.vercel.app/mcp" },
+        "github": {
+          "type": "http",
+          "url": "https://api.githubcopilot.com/mcp/"
+        }
+      }
+    }
+  }
+}
