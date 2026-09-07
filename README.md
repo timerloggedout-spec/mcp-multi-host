@@ -1,3 +1,10 @@
+> **Folded into `termux-monorepo`'s `mcp-hub/`.** This repo was a catalog +
+> README only — no server code — kept in sync by hand as a second place.
+> The host table and `catalog.json` now live at
+> [`termux-monorepo/mcp-hub`](https://github.com/timerloggedout-spec/termux-monorepo/tree/master/mcp-hub)
+> (see PR [#442](https://github.com/timerloggedout-spec/termux-monorepo/pull/442)).
+> This repo is left in place, not deleted, pending a decision on archiving it.
+
 # mcp-multi-host
 
 Operational registry for the P0 MCP multi-host stack.
